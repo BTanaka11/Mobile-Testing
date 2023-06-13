@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+
+}
+
+nav {
+  border: 3px solid black;
+  height: 10vh;
+  align-items: center;
+}
+
+nav > ul {
+  display: flex;
+  justify-content:space-around;
+  list-style-type: none;
+}
+
+nav > ul > li {
+  display: inline-block;
+}
+
+#main_div {
+  height: 85vh;
+  max-width: 90vw;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/9;
+}
+
+svg {
+  border: 3px solid black;
+}
+
+path {
+  fill: orange;
+  stroke: black;
+}
+
