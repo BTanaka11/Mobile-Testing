@@ -24,7 +24,7 @@ buttonLogin.addEventListener('click', ()=>{
 })
 
 let handleFullScreen = () => {
-  screen.orientation.lock("portrait");
+  screen.orientation.lock("landscape");
 }
 
 
