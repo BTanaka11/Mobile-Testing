@@ -21,7 +21,7 @@ body {
   position: relative;
   aspect-ratio: 16/9;
   max-width: 100%;
-  max-height: 90vh;
+  /* max-height: 90vh; */
 }
 
 svg {

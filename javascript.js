@@ -3,7 +3,7 @@ let mainDiv = document.querySelector("#main_div");
 
 let exitButton = document.getElementById("Exit");
 
-let hamburgerMenu = document.getElementById("hamburger");
+let hamburgerMenu = document.querySelector("#hamburger");
 
 let navDiv = document.getElementById("nav_div")
 
@@ -52,6 +52,8 @@ let handleFullScreen = () => {
     })
   });
 }
+
+
 
 exitButton.addEventListener('click', ()=> {
   console.log('exited!')
