@@ -1,5 +1,3 @@
-
-
 let checkIfMobile = (str) => {
   let regexd = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
   return regexd.test(str) ? 'Mobile' : 'Desktop'
