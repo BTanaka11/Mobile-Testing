@@ -28,7 +28,7 @@ let handleFullScreen = () => {
 }
 
 
-let mainDiv = document.querySelector("body");
+let mainDiv = document.querySelector("#entire_div");
 
 document.addEventListener("DOMContentLoaded", ()=>{
   document.addEventListener("fullscreenchange", (event) => {console.log('changed!')});
