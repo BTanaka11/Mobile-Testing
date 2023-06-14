@@ -1,5 +1,5 @@
 
-let mainDiv = document.querySelector("#entire_div");
+let mainDiv = document.querySelector("body");
 
 let exitButton = document.getElementById("Exit");
 
