@@ -1,20 +1,50 @@
 let checkIfMobile = (str) => {
   let regexd = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
-  return regexd.test(str) ? 'Mobile' : 'Desktop'
+  return regexd.test(str);
 }
 
-let mobileTestResult = checkIfMobile(navigator.userAgent);
+let mobile = checkIfMobile(navigator.userAgent);
 
-let textMobile = document.getElementById("mobile_Test");
-textMobile.innerHTML = checkIfMobile(navigator.userAgent)
+let textMobile = document.getElementById("mobile_Test")
+textMobile.innerHTML = mobile ? 'Mobile' : 'Desktop' ;
 
-if (mobileTestResult === 'Mobile') {
-  screen.orientation.lock("landscape");
+
+let buttonLogin = document.getElementById("login");
+buttonLogin.addEventListener('click', ()=>{
+  buttonLogin.style.display = "none";
+  if (mobile) {
+    if (!document.fullscreenElement) {
+      mainDiv.requestFullscreen()
+      .then(()=>handleFullScreen())
+    } else {
+      handleFullScreen()
+    }
+  }
+
+})
+
+let handleFullScreen = () => {
+  screen.orientation.lock("portrait");
 }
 
-// console.log(screen.orientation)
-let orientationText = document.getElementById("orientionChange");
 
-screen.addEventListener("orientationchange", () => {
-  orientationText.innerHTML = `Screen orientation changed: ${screen.orientation}`
+let mainDiv = document.querySelector("body");
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  document.addEventListener("fullscreenchange", (event) => {console.log('changed!')});
+
 });
+// if (mobileTestResult) {
+//   if (!document.fullscreenElement) {
+//     document.requestFullscreen()
+//   }
+//   screen.orientation.lock("landscape");
+//   document.requestFullscreen
+// }
+
+// // console.log(screen.orientation)
+// let orientationText = document.getElementById("orientionChange");
+
+// screen.addEventListener("orientationchange", () => {
+//   orientationText.innerHTML = `Screen orientation changed: ${screen.orientation}`
+// });

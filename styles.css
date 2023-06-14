@@ -28,3 +28,7 @@ path {
   stroke: black;
 }
 
+#login {
+  /* display: none; */
+  color: red;
+}
