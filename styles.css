@@ -26,7 +26,18 @@ body {
   max-height: 80%;
   border: 2px solid black;
 }
-
+#redDiv {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  right:0px;
+  bottom:0px;
+  background-color: red;
+  opacity: .5;
+  font-size: larger;
+  text-align: center;
+  align-content: center;
+}
 path {
   fill: orange;
   stroke: black;

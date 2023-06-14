@@ -3,8 +3,6 @@ let mainDiv = document.querySelector("body");
 
 let exitButton = document.getElementById("Exit");
 
-// let hamburgerMenu = document.querySelector("#hamburger");
-
 let navDiv = document.getElementById("nav_div")
 
 let checkIfMobile = (str) => {
@@ -39,22 +37,7 @@ buttonLogin.addEventListener('click', ()=>{
 
 let handleFullScreen = () => {
   screen.orientation.lock("landscape").then(()=>{programmaticallyLocked=true});
-  // navDiv.style.position = "fixed";
-  // navDiv.style.display = "none";
-  // hamburgerMenu.style.fillOpacity = ".5";
-
-  // hamburgerMenu.addEventListener('click', ()=> {
-  //   console.log('hamb')
-  //   hamburgerMenu.style.fillOpacity = "0";
-  //   hamburgerMenu.style.pointerEvents = "none";
-  //   navDiv.style.display = "flex";
-  //   mainDiv.addEventListener('click', ()=> {
-  //     handleFullScreen();
-  //   })
-  // });
 }
-
-
 
 exitButton.addEventListener('click', ()=> {
   console.log('exited!')
@@ -69,8 +52,3 @@ exitButton.addEventListener('click', ()=> {
     programmaticallyEnteredFullScreen = false;
   }
 });
-
-// document.addEventListener("DOMContentLoaded", ()=>{
-//   document.addEventListener("fullscreenchange", (event) => {console.log('changed!')});
-
-// });
