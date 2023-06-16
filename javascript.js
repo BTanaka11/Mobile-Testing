@@ -15,7 +15,7 @@ let mobile = checkIfMobile(navigator.userAgent);
 let textMobile = document.getElementById("mobile_Test")
 // textMobile.innerHTML = mobile ? 'Mobile' : 'Desktop' ;
 // console.log(document.fullscreenEnabled);
-textMobile.innerHTML = document.fullscreenEnabled ? 'full screen allowed' : 'full screen not allowed';
+textMobile.innerHTML = document.fullscreenEnabled ? 'true' : 'false';
 
 let programmaticallyEnteredFullScreen = false;
 let programmaticallyLocked = false;
