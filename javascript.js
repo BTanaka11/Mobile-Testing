@@ -1,8 +1,6 @@
 
 let mainDiv = document.querySelector("body");
-
 let exitButton = document.getElementById("Exit");
-
 let navDiv = document.getElementById("nav_div")
 
 let checkIfMobile = (str) => {
@@ -21,28 +19,39 @@ let programmaticallyEnteredFullScreen = false;
 let programmaticallyLocked = false;
 
 let buttonLogin = document.getElementById("login");
+
 buttonLogin.addEventListener('click', ()=>{
   buttonLogin.style.display = "none";
   if (mobile) {
-    if (!document.fullscreenElement) {
+    if (document.fullscreenElement) {
+      programmaticallyEnteredFullScreen = false;
+      handleFullScreen()
+
+    } else {
       mainDiv.requestFullscreen({ navigationUI: "show" })
       .then(()=>{
         programmaticallyEnteredFullScreen = true;
         handleFullScreen();
       })
-    } else {
-      handleFullScreen()
+      .catch(()=> {
+        alert('Please rotate screen 90 degrees for the best experience');
+        programmaticallyEnteredFullScreen = false;
+      })
     }
   }
 
 })
 
 let handleFullScreen = () => {
-  screen.orientation.lock("landscape").then(()=>{programmaticallyLocked=true});
+  screen.orientation.lock("landscape")
+  .then(
+    ()=>{programmaticallyLocked=true}
+  )
+  .catch(()=>{programmaticallyLocked=false})
 }
 
 exitButton.addEventListener('click', ()=> {
-  console.log('exited!')
+
   buttonLogin.style.display = "inline-block";
   if (programmaticallyLocked) {
     screen.orientation.unlock();
