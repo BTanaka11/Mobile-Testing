@@ -2,6 +2,7 @@
 let mainDiv = document.querySelector("body");
 let exitButton = document.getElementById("Exit");
 let navDiv = document.getElementById("nav_div")
+let hamburgerButton = document.getElementById("hamburger")
 
 let checkIfMobile = (str) => {
   let regexd = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
@@ -11,9 +12,42 @@ let checkIfMobile = (str) => {
 let mobile = checkIfMobile(navigator.userAgent);
 
 let textMobile = document.getElementById("mobile_Test")
-// textMobile.innerHTML = mobile ? 'Mobile' : 'Desktop' ;
-// console.log(document.fullscreenEnabled);
-textMobile.innerHTML = document.fullscreenEnabled ? 'true' : 'false';
+textMobile.innerHTML = mobile ? 'You are on Mobile' : 'You are on Desktop' ;
+
+let checkLandscapeOrient = () => {
+  let orient = screen.orientation.type;
+  return orient === 'landscape-primary' || orient === 'landscape-secondary'
+};
+
+let hamburgMode = false;
+let toggleHamburger = () => {
+  if (!hamburgMode) {
+    navDiv.style.position = 'absolute'
+    navDiv.style.open = "false"
+    hamburgerButton.style.display = "inline"
+    hamburgMode = true
+  } else {
+    navDiv.style.position = 'relative'
+    navDiv.style.open = "true"
+    hamburgerButton.style.display = "none"
+    hamburgMode = false
+  }
+}
+toggleHamburger()
+setTimeout(()=>toggleHamburger(), 5000);
+
+if (checkLandscapeOrient() && mobile) {
+  toggleHamburger()
+}
+
+screen.orientation.addEventListener('change', function(e) {
+  if (mobile) {
+    toggleHamburger()
+  }
+})
+
+let fullScreenEnabled = document.getElementById("full_screen_enabled_test")
+fullScreenEnabled.innerHTML = document.fullscreenEnabled ? 'fullscreen enabled' : 'fullscreen disabled';
 
 let programmaticallyEnteredFullScreen = false;
 let programmaticallyLocked = false;
@@ -63,3 +97,4 @@ exitButton.addEventListener('click', ()=> {
     programmaticallyEnteredFullScreen = false;
   }
 });
+
