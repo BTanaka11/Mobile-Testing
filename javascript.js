@@ -74,9 +74,7 @@ let buttonLogin = document.getElementById("login");
 buttonLogin.addEventListener('click', ()=>{
   buttonLogin.style.display = "none";
   if (mobile) {
-    if (checkLandscapeOrient()) {
-      toggleHamburger()
-    }
+
     if (document.fullscreenElement) {
       programmaticallyEnteredFullScreen = false;
       handleFullScreen()
@@ -94,7 +92,9 @@ buttonLogin.addEventListener('click', ()=>{
       })
     }
   }
-
+  if (checkLandscapeOrient() && !hamburgMode) {
+    toggleHamburger()
+  }
 })
 
 let handleFullScreen = () => {
