@@ -101,17 +101,19 @@ let handleFullScreen = () => {
 
 exitButton.addEventListener('click', ()=> {
   buttonLogin.style.display = "inline-block";
-  if (programmaticallyLocked) {
-    screen.orientation.unlock()
-    .then(()=>{programmaticallyLocked = false;})
-    .catch(()=>{});
-  }
 
   if (programmaticallyEnteredFullScreen) {
     document.exitFullscreen()
     .then(()=> {programmaticallyEnteredFullScreen = false;})
-    .catch(()=>{})
+    .catch(()=>{document.getElementById('full_screen_enabled_test').innerHTML="108"})
   }
+
+  if (programmaticallyLocked) {
+    screen.orientation.unlock()
+    .then(()=>{programmaticallyLocked = false;})
+    .catch(()=>{document.getElementById('full_screen_enabled_test').innerHTML="114"});
+  }
+
   if (navDiv.getAttribute('mobile') === 'true') {
     turnOffHamburger();
   }
