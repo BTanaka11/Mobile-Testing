@@ -50,7 +50,6 @@ let toggleHamburger = () => {
   }
 }
 
-toggleHamburger()
 // setTimeout(()=>toggleHamburger(), 5000);
 
 hamburgerButton.addEventListener('click', ()=> {
