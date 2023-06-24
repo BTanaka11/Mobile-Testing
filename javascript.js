@@ -2,6 +2,7 @@ let xx = document.querySelector("body");
 let mainDiv = document.getElementById('main_div');
 let exitButton = document.getElementById("Exit");
 let navDiv = document.querySelector(".nav_div");
+let redDiv = document.getElementById('redDiv');
 
 let hamburgerButton = document.getElementById("hamburger")
 let testbutton = document.getElementById('testbutton');
@@ -48,7 +49,8 @@ let toggleHamburger = () => {
     hamburgMode = false
   }
 }
-// toggleHamburger()
+
+toggleHamburger()
 // setTimeout(()=>toggleHamburger(), 5000);
 
 hamburgerButton.addEventListener('click', ()=> {
@@ -88,7 +90,8 @@ buttonLogin.addEventListener('click', ()=>{
         handleFullScreen();
       })
       .catch(()=> {
-        alert('Please rotate screen 90 degrees for the best experience');
+        // alert('Please rotate screen 90 degrees for the best experience');
+        redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience"
         programmaticallyEnteredFullScreen = false;
       })
     }

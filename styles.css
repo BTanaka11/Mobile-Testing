@@ -22,7 +22,7 @@ body {
 
 .mobile {
   top: -80%;
-  width: 80%;
+  width: 50%;
   position: absolute;
 }
 .mobile::backdrop {
