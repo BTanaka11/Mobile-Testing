@@ -8,13 +8,13 @@
   </head>
   <body>
 
-    <dialog open class="nav_div">
+    <div class="nav_div" mobile="false">
       <div>Game</div>
       <div>About</div>
       <div>Leaderboard</div>
       <div>Game History</div>
       <div id="Exit" >Logout/Exit</div>
-    </dialog>
+    </div>
     <div id="main_div">
 
       <svg viewbox="0 0 160 90" >
@@ -29,7 +29,7 @@
         <text id="full_screen_enabled_test" x="90" y="20" font-size="5"  fill="grey" fill-opacity=".5"></text>
       </svg>
 
-      <div id="redDiv">This semitransparent red div should take up bottom right quadrant</div>
+      <div id="redDiv"></div>
       <button id="testbutton" >TestButton</button>
       <svg id="hamburger" x="0" y="0" width="40" height="60" viewBox="0 0 40 60">
         <rect x="0" y="0" width="40" height="10" fill="grey" stroke-width=".4" stroke="black"/>

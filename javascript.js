@@ -3,81 +3,76 @@ let mainDiv = document.getElementById('main_div');
 let exitButton = document.getElementById("Exit");
 let navDiv = document.querySelector(".nav_div");
 let redDiv = document.getElementById('redDiv');
+let buttonLogin = document.getElementById("login");
 
 let hamburgerButton = document.getElementById("hamburger")
 let testbutton = document.getElementById('testbutton');
 testbutton.addEventListener('click', ()=>alert('clicked!'))
 
-navDiv.addEventListener('click', (e)=> {
-  let rect = e.target.getBoundingClientRect();
-  if (rect.left > e.clientX || rect.right < e.clientX || rect.top > e.clientY || rect.bottom < e.clientY) {
-    hamburgerButton.style.display = "inline";
-    navDiv.close();
-  }
-})
-
-let checkIfMobile = (str) => {
+let checkIfMobile = () => {
   let regexd = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
-  return regexd.test(str);
+  return regexd.test(navigator.userAgent);
 }
-
-let mobile = checkIfMobile(navigator.userAgent);
-
-let textMobile = document.getElementById("mobile_Test")
-textMobile.innerHTML = mobile ? 'You are on Mobile' : 'You are on Desktop' ;
 
 let checkLandscapeOrient = () => {
   let orient = screen.orientation.type;
   return orient === 'landscape-primary' || orient === 'landscape-secondary'
 };
 
-let hamburgMode = false;
-let toggleHamburger = () => {
-  if (!hamburgMode) {
-    navDiv.classList.add("mobile");
-    mainDiv.prepend(navDiv)
+let turnOnHamburger = () => {
+  mainDiv.append(navDiv)
+  navDiv.setAttribute('mobile', 'true');
+  navDiv.style.display = 'none';
+  hamburgerButton.style.display = "inline"
+  redDiv.innerHTML = ""
+}
 
-    navDiv.close()
-    hamburgerButton.style.display = "inline"
-    hamburgMode = true
-  } else {
-    navDiv.classList.remove("mobile");
-    xx.prepend(navDiv)
-    navDiv.show()
-    hamburgerButton.style.display = "none"
-    hamburgMode = false
+let turnOffHamburger = () => {
+  xx.prepend(navDiv)
+  navDiv.setAttribute('mobile', 'false');
+  navDiv.style.display = 'flex';
+  hamburgerButton.style.display = "none"
+  redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience";
+}
+
+let handleChange = () => {
+  if (checkIfMobile()) {
+    if (checkLandscapeOrient() && navDiv.getAttribute('mobile') === 'false') {
+      turnOnHamburger()
+    } else if (!checkLandscapeOrient() && navDiv.getAttribute('mobile') === 'true') {
+      turnOffHamburger()
+    } else if (!checkLandscapeOrient() && navDiv.getAttribute('mobile') === 'false') {
+      redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience";
+    }
   }
 }
 
-// setTimeout(()=>toggleHamburger(), 5000);
-
-hamburgerButton.addEventListener('click', ()=> {
-  hamburgerButton.style.display = 'none';
-  navDiv.showModal()
+screen.orientation.addEventListener('change', function() {
+  handleChange();
 })
 
-screen.orientation.addEventListener('change', function(e) {
-  if (mobile) {
-    toggleHamburger()
+navDiv.addEventListener('click', (e)=> {
+  let rect = e.target.getBoundingClientRect();
+  if (rect.left > e.clientX || rect.right < e.clientX || rect.top > e.clientY || rect.bottom < e.clientY) {
+    hamburgerButton.style.display = "inline";
+    navDiv.style.display = 'none';
   }
 })
 
-let fullScreenEnabled = document.getElementById("full_screen_enabled_test")
-fullScreenEnabled.innerHTML = document.fullscreenEnabled ? 'fullscreen enabled' : 'fullscreen disabled';
+hamburgerButton.addEventListener('click', ()=> {
+  hamburgerButton.style.display = 'none';
+  navDiv.style.display = 'flex';
+})
 
 let programmaticallyEnteredFullScreen = false;
 let programmaticallyLocked = false;
 
-let buttonLogin = document.getElementById("login");
-
 buttonLogin.addEventListener('click', ()=>{
   buttonLogin.style.display = "none";
-  if (mobile) {
-
+  if (checkIfMobile()) {
     if (document.fullscreenElement) {
       programmaticallyEnteredFullScreen = false;
       handleFullScreen()
-
     } else {
       xx.requestFullscreen({ navigationUI: "show" })
       .then(()=>{
@@ -85,43 +80,39 @@ buttonLogin.addEventListener('click', ()=>{
         handleFullScreen();
       })
       .catch(()=> {
-        // alert('Please rotate screen 90 degrees for the best experience');
-        redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience"
         programmaticallyEnteredFullScreen = false;
       })
     }
-    if (checkLandscapeOrient() && !hamburgMode) {
-      toggleHamburger()
-    }
+    handleChange()
   }
-
 })
 
 let handleFullScreen = () => {
   screen.orientation.lock("landscape")
   .then(
-    ()=>{programmaticallyLocked=true}
+    ()=>{
+      programmaticallyLocked = true
+    }
   )
   .catch(()=>{
-    redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience!"
     programmaticallyLocked=false
   })
 }
 
 exitButton.addEventListener('click', ()=> {
-
   buttonLogin.style.display = "inline-block";
   if (programmaticallyLocked) {
-    screen.orientation.unlock();
-    programmaticallyLocked = false;
+    screen.orientation.unlock()
+    .then(()=>{programmaticallyLocked = false;})
+    .catch(()=>{});
   }
 
   if (programmaticallyEnteredFullScreen) {
-    document.exitFullscreen();
-    programmaticallyEnteredFullScreen = false;
+    document.exitFullscreen()
+    .then(()=> {programmaticallyEnteredFullScreen = false;})
+    .catch(()=>{})
   }
-  if (hamburgMode) {
-    toggleHamburger()
+  if (navDiv.getAttribute('mobile') === 'true') {
+    turnOffHamburger();
   }
 });
-
