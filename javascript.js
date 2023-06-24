@@ -103,7 +103,10 @@ let handleFullScreen = () => {
   .then(
     ()=>{programmaticallyLocked=true}
   )
-  .catch(()=>{programmaticallyLocked=false})
+  .catch(()=>{
+    redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience!"
+    programmaticallyLocked=false
+  })
 }
 
 exitButton.addEventListener('click', ()=> {
