@@ -1,8 +1,19 @@
-
-let mainDiv = document.querySelector("body");
+let xx = document.querySelector("body");
+let mainDiv = document.getElementById('main_div');
 let exitButton = document.getElementById("Exit");
-let navDiv = document.getElementById("nav_div")
+let navDiv = document.querySelector(".nav_div");
+
 let hamburgerButton = document.getElementById("hamburger")
+let testbutton = document.getElementById('testbutton');
+testbutton.addEventListener('click', ()=>alert('clicked!'))
+
+navDiv.addEventListener('click', (e)=> {
+  let rect = e.target.getBoundingClientRect();
+  if (rect.left > e.clientX || rect.right < e.clientX || rect.top > e.clientY || rect.bottom < e.clientY) {
+    hamburgerButton.style.display = "inline";
+    navDiv.close();
+  }
+})
 
 let checkIfMobile = (str) => {
   let regexd = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i;
@@ -22,19 +33,28 @@ let checkLandscapeOrient = () => {
 let hamburgMode = false;
 let toggleHamburger = () => {
   if (!hamburgMode) {
-    navDiv.style.position = 'absolute'
-    navDiv.style.open = "false"
+    navDiv.classList.add("mobile");
+    // navDiv.setAttribute('mobilizer', 'true')
+    mainDiv.prepend(navDiv)
+
+    navDiv.close()
     hamburgerButton.style.display = "inline"
     hamburgMode = true
   } else {
-    navDiv.style.position = 'relative'
-    navDiv.style.open = "true"
+    navDiv.classList.remove("mobile");
+    xx.prepend(navDiv)
+    navDiv.show()
     hamburgerButton.style.display = "none"
     hamburgMode = false
   }
 }
-toggleHamburger()
-setTimeout(()=>toggleHamburger(), 5000);
+// toggleHamburger()
+// setTimeout(()=>toggleHamburger(), 5000);
+
+hamburgerButton.addEventListener('click', ()=> {
+  hamburgerButton.style.display = 'none';
+  navDiv.showModal()
+})
 
 if (checkLandscapeOrient() && mobile) {
   toggleHamburger()
@@ -62,7 +82,7 @@ buttonLogin.addEventListener('click', ()=>{
       handleFullScreen()
 
     } else {
-      mainDiv.requestFullscreen({ navigationUI: "show" })
+      xx.requestFullscreen({ navigationUI: "show" })
       .then(()=>{
         programmaticallyEnteredFullScreen = true;
         handleFullScreen();
@@ -95,6 +115,9 @@ exitButton.addEventListener('click', ()=> {
   if (programmaticallyEnteredFullScreen) {
     document.exitFullscreen();
     programmaticallyEnteredFullScreen = false;
+  }
+  if (hamburgMode) {
+    toggleHamburger()
   }
 });
 

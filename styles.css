@@ -14,11 +14,20 @@ body {
   width: 100%;
   background-color: teal;
   color:white;
-  z-index: 5;
+  /* z-index: 5; */
   padding: 0px;
   position: relative;
+  top: 0%;
 }
 
+.mobile {
+  top: -80%;
+  width: 80%;
+  position: absolute;
+}
+.mobile::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+}
 #main_div {
   margin-left: auto;
   margin-right: auto;
@@ -45,7 +54,13 @@ path {
   fill: orange;
   stroke: black;
 }
-
+#testbutton {
+  position: absolute;
+  bottom: 5%;
+  left: 30%;
+  width:5%;
+  height: 5%;
+}
 #login {
   z-index: 10;
   position: fixed;
