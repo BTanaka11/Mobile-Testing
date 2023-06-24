@@ -35,7 +35,6 @@ let hamburgMode = false;
 let toggleHamburger = () => {
   if (!hamburgMode) {
     navDiv.classList.add("mobile");
-    // navDiv.setAttribute('mobilizer', 'true')
     mainDiv.prepend(navDiv)
 
     navDiv.close()
@@ -91,10 +90,11 @@ buttonLogin.addEventListener('click', ()=>{
         programmaticallyEnteredFullScreen = false;
       })
     }
+    if (checkLandscapeOrient() && !hamburgMode) {
+      toggleHamburger()
+    }
   }
-  if (checkLandscapeOrient() && !hamburgMode) {
-    toggleHamburger()
-  }
+
 })
 
 let handleFullScreen = () => {

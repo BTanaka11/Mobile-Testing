@@ -27,6 +27,11 @@ body {
 }
 .mobile::backdrop {
   background: rgba(0, 0, 0, 0.75);
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  position: fixed;
 }
 #main_div {
   margin-left: auto;
