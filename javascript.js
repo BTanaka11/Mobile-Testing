@@ -57,10 +57,6 @@ hamburgerButton.addEventListener('click', ()=> {
   navDiv.showModal()
 })
 
-if (checkLandscapeOrient() && mobile) {
-  toggleHamburger()
-}
-
 screen.orientation.addEventListener('change', function(e) {
   if (mobile) {
     toggleHamburger()
@@ -78,6 +74,9 @@ let buttonLogin = document.getElementById("login");
 buttonLogin.addEventListener('click', ()=>{
   buttonLogin.style.display = "none";
   if (mobile) {
+    if (checkLandscapeOrient()) {
+      toggleHamburger()
+    }
     if (document.fullscreenElement) {
       programmaticallyEnteredFullScreen = false;
       handleFullScreen()
