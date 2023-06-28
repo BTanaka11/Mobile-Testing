@@ -22,16 +22,17 @@ let checkLandscapeOrient = () => {
 let turnOnHamburger = () => {
   mainDiv.append(navDiv)
   navDiv.setAttribute('mobile', 'true');
-  navDiv.style.display = 'none';
-  hamburgerButton.style.display = "inline"
+  // navDiv.style.display = 'none';
+  navDiv.style.visibility = 'hidden';
+  hamburgerButton.style.visibility = 'visible';
   redDiv.innerHTML = ""
 }
 
 let turnOffHamburger = () => {
   xx.prepend(navDiv)
   navDiv.setAttribute('mobile', 'false');
-  navDiv.style.display = 'flex';
-  hamburgerButton.style.display = "none"
+  navDiv.style.visibility = 'visible';
+  hamburgerButton.style.visibility = "hidden"
   redDiv.innerHTML = "Please rotate screen 90 degrees for the best experience";
 }
 
@@ -54,21 +55,21 @@ screen.orientation.addEventListener('change', function() {
 navDiv.addEventListener('click', (e)=> {
   let rect = e.target.getBoundingClientRect();
   if (rect.left > e.clientX || rect.right < e.clientX || rect.top > e.clientY || rect.bottom < e.clientY) {
-    hamburgerButton.style.display = "inline";
-    navDiv.style.display = 'none';
+    hamburgerButton.style.visibility = "visible";
+    navDiv.style.visibility = 'hidden';
   }
 })
 
 hamburgerButton.addEventListener('click', ()=> {
-  hamburgerButton.style.display = 'none';
-  navDiv.style.display = 'flex';
+  hamburgerButton.style.visibility = 'hidden';
+  navDiv.style.visibility = 'visible';
 })
 
 let programmaticallyEnteredFullScreen = false;
 let programmaticallyLocked = false;
 
 buttonLogin.addEventListener('click', ()=>{
-  buttonLogin.style.display = "none";
+  buttonLogin.style.visibility = "hidden";
   if (checkIfMobile()) {
     if (document.fullscreenElement) {
       programmaticallyEnteredFullScreen = false;
@@ -100,7 +101,7 @@ let handleFullScreen = () => {
 }
 
 exitButton.addEventListener('click', ()=> {
-  buttonLogin.style.display = "inline-block";
+  buttonLogin.style.visibility = "visible";
 
   if (programmaticallyEnteredFullScreen) {
     document.exitFullscreen()
